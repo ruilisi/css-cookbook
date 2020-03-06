@@ -70,10 +70,13 @@
 引申：
 [div等块级标签横向排列的方法总结](https://blog.csdn.net/zmhawk/article/details/73293366)
 
+[Flex布局教程-阮一峰](http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html?utm_source=tuicool)
+
 ## div固定在页面底部
 
 *Solution*：
 将父div设置为`position: relative`，然后将子div样式设置为
+
 ```CSS
 	position: absolute;
 	bottom: 0;
@@ -130,3 +133,55 @@ div设置宽度后style样式加上`word-break: break-all;`或`word-wrap: break-
 ### 3.Menu组件
 
 `Menu`标签下不能加别的标签，否则会有warning，必须放在`<Menu.Item>...</Menu.Item>`里面。
+
+## Antd自定义Icon图标
+
+antd从4.0开始，不再内置Icon组件，使用独立的包`@ant-design/icons`。由于antd自带的图标不一定符合开发需求，所以有时会选择自定义图标。
+
+本文使用的方法最简单，使用[iconfont.cn](iconfont.cn)，iconfont.cn是阿里的矢量图标库，里面有大量图标可供选择。将iconfont.cn上生成的js地址复制到代码中，即可实现渲染图标。
+
+![iconfont](/_media/iconfont.png)
+
+```
+	import { createFromIconfontCN } from '@ant-design/icons'
+	
+	const MyIcon = createFromIconfontCN({
+		scriptUrl: '//at.alicdn.com/t/font_1675145_7w7tb9mha85.js'
+	})
+	
+	<MyIcon />
+```
+
+
+
+## 给项目安装webpack-bundle-analyzer
+
+webpack-bundle-analyzer官方文档：https://www.npmjs.com/package/webpack-bundle-analyzer
+
+通过使用webpack-bundle-analyzer可以看到项目各模块的大小，可以按需优化。
+
+![webpack_1](/_media/webpack_1.png)
+
+安装步骤：
+
+1. 安装依赖包
+
+   ```
+   $ yarn add @next/bundle-analyzer
+   or
+   $ npm install @next/bundle-analyzer
+   
+   $ npm i --save-dev cross-env
+   
+   $ npm i --save-dev faker
+   ```
+
+2. 编辑`package.json`中`scrtip` 加上 `"analyze": "cross-env ANALYZE=true yarn build"`
+
+   ![webapck_2](/_media/webpack_2.png)
+
+3. 编辑`next.config.js`，注意`isDev`
+
+   ![webpacl_3](/_media/webpack_3.png)
+
+4. 运行`yarn analyze`就可以生成两个页面文件，`client.html` 和`server.html`。
