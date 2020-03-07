@@ -1,6 +1,6 @@
 # 快速开始
 
-🚀 本文档主要记录在写前端CSS代码遇到的问题及解决方法，持续更新中。
+🚀 本文档主要记录在写前端CSS时遇到的问题及解决方法，持续更新中。
 
 ## 前端CSS命名规范
 
@@ -72,9 +72,30 @@
 
 [Flex布局教程-阮一峰](http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html?utm_source=tuicool)
 
+### 两个div在同一行，分别在最左边和最右边
+
+*Solution1*:
+
+```javascript
+<div>
+  <div style={{ display: 'inline-block'}}>aaa</div>
+  <div style={{ float: 'right' }}>bbb</div>
+</div>
+```
+
+*Solution2*:
+
+```javascript
+<div style={{ display: 'flex', justifyContent: 'flex-end'}}>
+	<div style={{ display: 'flex', width: '100%'}}>aaa</div>
+	<div style={{ display: 'flex'}}>bbb</div>
+</div>
+```
+
 ## div固定在页面底部
 
 *Solution*：
+
 将父div设置为`position: relative`，然后将子div样式设置为
 
 ```CSS
@@ -89,6 +110,7 @@
 ## div内文字超过宽度自动换行
 
 *Solution*：
+
 div设置宽度后style样式加上`word-break: break-all;`或`word-wrap: break-word;`
 
 `word-break: break-all`：例如div宽度为200px，它的内容超过200px会自动换行，如果该行末尾有个很长的单词（congratulation），它会把单词截断，变成该行末端为congra，下一行为tulation。
@@ -185,3 +207,46 @@ webpack-bundle-analyzer官方文档：https://www.npmjs.com/package/webpack-bund
    ![webpacl_3](/_media/webpack_3.png)
 
 4. 运行`yarn analyze`就可以生成两个页面文件，`client.html` 和`server.html`。
+
+## Antd中Input与Button在一行显示
+
+*Question*：
+
+要使Input输入框和Button按钮在一行.
+
+*Solution1*：
+
+```javascript
+<Row>
+  <Col span={16}>
+  	<Input value={value} onChange={onChange} />
+  </Col>
+  <Col span={8}>
+  <Button onClick={onClick}>{text}</Button>
+  </Col>
+</Row>
+```
+
+这种方法使用`Row`，`Col`组件，虽然代码精简，但同时也存在问题，`Input` 和`Button`的宽度无法占满整一行。
+
+*Solution2*：
+
+```javascript
+ <Input.Search
+          enterButton={text}
+          value={value}
+          onChange={onChange}
+          onSearch={onClick}
+ />
+```
+
+这种方法下，`Input`长度自动伸缩，以免字数过多显示不下。
+
+*Solution3*：
+
+```javascript
+<Input addonAfter={<Button>{text}</Button>} />
+```
+
+`addonAfter` 是Input组件自带的属性。  
+
