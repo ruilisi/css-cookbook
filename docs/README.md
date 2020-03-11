@@ -2,11 +2,25 @@
 
 🚀 本文档主要记录在写前端CSS时遇到的问题及解决方法，持续更新中。
 
-## 前端CSS命名规范
 
-1. 没有任何理由的情况下就用worda-wordb的命名方法
-2. 由具体单词组成的composable css用A-B命名，譬如float: left，就写成F-L
-3. 比较复杂的常用combo，一般我们用骆驼命名法，譬如alignCenter
+
+## 前端技术栈与工具（学习路线）
+
+工具：**zsh + tmux + vim (SpaceVim)**
+
+技术栈：**React + Antd + CSS + Javascript + ES6 + Next.js + Redux**
+
+
+
+## CSS命名规范
+
+1. 没有任何理由的情况下就用worda-wordb的命名方法。
+
+2. 由具体单词组成的composable css用A-B命名，譬如float: left，就写成F-L。
+
+3. 比较复杂的常用combo，一般我们用骆驼命名法，譬如alignCenter。
+
+   
 
 ## div高度宽度的设置
 
@@ -46,7 +60,7 @@
 
 *Solution2* :
 
-使用[Ant-Design](https://ant.design/index-cn) 的[Grid栅格系统](https://ant.design/components/grid-cn/) 
+使用[Ant-Design](https://ant.design/index-cn) 的[Grid栅格系统](https://ant.design/components/grid-cn/) 。
 
 ```js
 <Row>
@@ -55,12 +69,14 @@
 </Row>
 ```
 
+
+
 ## 多个div在同一行
 
 *Question*：如何使多个div标签在同一行？
 
 *Solution1*：
-设置每个div的style样式：`display: inline-block`
+设置每个div的style样式：`display: inline-block`。
 
 使用`inline-block`同时也有问题，比如，使得`Icon`图标和一个div在同一行，但是两个行高不一样。原因是默认情况下使用`inline-block`属性时，并列显示的元素的垂直对齐方式是底部对齐，为了使垂直对齐方式改为顶部对齐，就需要在div元素的样式中加入`vertical-align`属性。
 
@@ -76,7 +92,7 @@
 
 *Solution1*:
 
-```javascript
+```js
 <div>
   <div style={{ display: 'inline-block'}}>aaa</div>
   <div style={{ float: 'right' }}>bbb</div>
@@ -85,27 +101,27 @@
 
 *Solution2*:
 
-```javascript
+```js
 <div style={{ display: 'flex', justifyContent: 'flex-end'}}>
 	<div style={{ display: 'flex', width: '100%'}}>aaa</div>
 	<div style={{ display: 'flex'}}>bbb</div>
 </div>
 ```
 
+
+
 ## div固定在页面底部
 
 *Solution*：
 
-将父div设置为`position: relative`，然后将子div样式设置为
+将父div设置为`position: relative`，然后将子div样式设置为：
 
 ```CSS
 	position: absolute;
 	bottom: 0;
 ```
 
-## CSS hover效果总结
 
-[CSS-鼠标移入移除样式改变，并有过渡效果](https://www.hangge.com/blog/cache/detail_982.html)
 
 ## div内文字超过宽度自动换行
 
@@ -117,15 +133,23 @@ div设置宽度后style样式加上`word-break: break-all;`或`word-wrap: break-
 
 `word-wrap: break-word`：与上面相同，但区别是它不会截断单词，它会把congratulation整个单词看成一个整体，自动把整个单词放到下一行，不会把单词截断。
 
+
+
+## CSS hover效果总结
+
+[CSS-鼠标移入移除样式改变，并有过渡效果](https://www.hangge.com/blog/cache/detail_982.html)
+
+
+
 ## Antd修改组件样式（antd-v3）
 
 ### 1.修改Modal背景颜色
 
-```javascript
+```js
 <Modal className="modal-dialog" />
 ```
 
-由于jsx不支持嵌套，所以在main.scss中添加modal-dialog样式
+由于jsx不支持嵌套，所以在main.scss中添加modal-dialog样式，
 
 ```css
 
@@ -142,6 +166,7 @@ div设置宽度后style样式加上`word-break: break-all;`或`word-wrap: break-
 因为要修改的地方在`ant-menu-vertical`，所以不能直接在`Menu`标签里面添加`className`，而是要在它上一级div里面添加`layout-border`。
 
 **!!!一定要注意逗号和空格**
+
 ```css
 // main.scss
 
@@ -156,6 +181,8 @@ div设置宽度后style样式加上`word-break: break-all;`或`word-wrap: break-
 
 `Menu`标签下不能加别的标签，否则会有warning，必须放在`<Menu.Item>...</Menu.Item>`里面。
 
+
+
 ## Antd自定义Icon图标
 
 antd从4.0开始，不再内置Icon组件，使用独立的包`@ant-design/icons`。由于antd自带的图标不一定符合开发需求，所以有时会选择自定义图标。
@@ -164,15 +191,17 @@ antd从4.0开始，不再内置Icon组件，使用独立的包`@ant-design/icons
 
 ![iconfont](/_media/iconfont.png)
 
-```
+```js
 	import { createFromIconfontCN } from '@ant-design/icons'
 	
 	const MyIcon = createFromIconfontCN({
 		scriptUrl: '//at.alicdn.com/t/font_1675145_7w7tb9mha85.js'
 	})
 	
-	<MyIcon />
+	<MyIcon type="icon-bianji"/> // type的值为图片下方的代码 
 ```
+
+![iconfont_1](/_media/iconfont_1.png)
 
 
 
@@ -188,7 +217,7 @@ webpack-bundle-analyzer官方文档：https://www.npmjs.com/package/webpack-bund
 
 1. 安装依赖包
 
-   ```
+   ```bash
    $ yarn add @next/bundle-analyzer
    or
    $ npm install @next/bundle-analyzer
@@ -208,15 +237,17 @@ webpack-bundle-analyzer官方文档：https://www.npmjs.com/package/webpack-bund
 
 4. 运行`yarn analyze`就可以生成两个页面文件，`client.html` 和`server.html`。
 
+
+
 ## Antd中Input与Button在一行显示
 
 *Question*：
 
-要使Input输入框和Button按钮在一行.
+要使`Input`输入框和`Button`按钮在一行。
 
 *Solution1*：
 
-```javascript
+```js
 <Row>
   <Col span={16}>
   	<Input value={value} onChange={onChange} />
@@ -231,7 +262,7 @@ webpack-bundle-analyzer官方文档：https://www.npmjs.com/package/webpack-bund
 
 *Solution2*：
 
-```javascript
+```js
  <Input.Search
           enterButton={text}
           value={value}
@@ -244,7 +275,7 @@ webpack-bundle-analyzer官方文档：https://www.npmjs.com/package/webpack-bund
 
 *Solution3*：
 
-```javascript
+```js
 <Input addonAfter={<Button>{text}</Button>} />
 ```
 
