@@ -8,7 +8,7 @@
 
 工具：**zsh + tmux + vim (SpaceVim)**
 
-技术栈：**React + Antd + CSS + Javascript + ES6 + Next.js + Redux**
+技术栈：**React + [Ant-Design](https://ant.design/index-cn) + CSS3 + Javascript + ES6 + Next.js + Redux**
 
 
 
@@ -280,4 +280,17 @@ webpack-bundle-analyzer官方文档：https://www.npmjs.com/package/webpack-bund
 ```
 
 `addonAfter` 是Input组件自带的属性。  
+
+
+
+## 隐藏滚动条还能滚动页面
+
+```css
+body {
+    width: 100vw;
+    ::-webkit-scrollbar {
+      display: none;
+    }
+  }
+```
 
