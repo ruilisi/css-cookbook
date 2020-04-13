@@ -15,12 +15,24 @@
 ## CSS命名规范
 
 1. 没有任何理由的情况下就用worda-wordb的命名方法。
-
 2. 由具体单词组成的composable css用A-B命名，譬如float: left，就写成F-L。
-
 3. 比较复杂的常用combo，一般我们用骆驼命名法，譬如alignCenter。
 
-   
+
+
+## React事件命令
+
+React事件的命名采用小驼峰式（camelCase），不是纯小写。
+
+例如：
+
+```react
+<button onClick={activateLasers}>
+	Activate Lasers
+</button>
+```
+
+
 
 ## div高度宽度的设置
 
@@ -143,7 +155,7 @@ div设置宽度后style样式加上`word-break: break-all;`或`word-wrap: break-
 
 ## Antd修改组件样式（antd-v3）
 
-### 1.修改Modal背景颜色
+### 修改Modal背景颜色
 
 ```js
 <Modal className="modal-dialog" />
@@ -160,7 +172,7 @@ div设置宽度后style样式加上`word-break: break-all;`或`word-wrap: break-
 }
 ```
 
-### 2.修改Menu的border-right样式
+### 修改Menu的border-right样式
 
 ![menu-example](/_media/antd-menu-example.png)
 因为要修改的地方在`ant-menu-vertical`，所以不能直接在`Menu`标签里面添加`className`，而是要在它上一级div里面添加`layout-border`。
@@ -177,7 +189,7 @@ div设置宽度后style样式加上`word-break: break-all;`或`word-wrap: break-
   }
 ```
 
-### 3.Menu组件
+### Menu组件
 
 `Menu`标签下不能加别的标签，否则会有warning，必须放在`<Menu.Item>...</Menu.Item>`里面。
 
@@ -294,7 +306,7 @@ body {
   }
 ```
 
-## 
+
 
 ## flex-grow和flex-shrink
 
@@ -404,3 +416,115 @@ flex实现三栏等高布局，且两边的侧栏宽度固定，中间一栏占�
 **参考资料**：https://zhuanlan.zhihu.com/p/24372279
 
 **flex实时布局效果展示**：https://demos.scotch.io/visual-guide-to-css3-flexbox-flexbox-playground/demos/
+
+
+
+## 在项目中使用进度条
+
+### 安装nprogress插件
+```
+$ yarn add nprogress
+或
+$ npm install --save nprogress
+```
+
+### 添加Router和NProgress的引用(在_app.js中添加)
+```javascript
+import NProgress from 'nprogress'
+import Router from 'next/router'
+//引用css样式文件
+import "./style/nprogress.css"
+```
+
+### 在_app.js中添加样式
+```javascript
+<Head>
+	<link rel="stylesheet" type="text/css" href="/nprogress.css" />
+</Head>
+```
+
+### 添加nprogress.css样式文件
+可自己修改样式。
+```css
+/* Make clicks pass-through */
+#nprogress {
+	pointer-events: none;
+}
+
+#nprogress .bar {
+	background: #29d;
+
+  position: fixed;
+  z-index: 1031;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 2px;
+}
+
+/* Fancy blur effect */
+#nprogress .peg {
+  display: block;
+  position: absolute;
+  right: 0px;
+  width: 100px;
+  height: 100%;
+  box-shadow: 0 0 10px #29d, 0 0 5px #29d;
+  opacity: 1;
+
+  -webkit-transform: rotate(3deg) translate(0px, -4px);
+  -ms-transform: rotate(3deg) translate(0px, -4px);
+  transform: rotate(3deg) translate(0px, -4px);
+}
+
+/* Remove these to get rid of the spinner */
+#nprogress .spinner {
+  display: block;
+  position: fixed;
+  z-index: 1031;
+  top: 15px;
+  right: 15px;
+}
+
+#nprogress .spinner-icon {
+  width: 18px;
+  height: 18px;
+  box-sizing: border-box;
+
+  border: solid 2px transparent;
+  border-top-color: #29d;
+  border-left-color: #29d;
+  border-radius: 50%;
+
+  -webkit-animation: nprogress-spinner 400ms linear infinite;
+  animation: nprogress-spinner 400ms linear infinite;
+}
+
+.nprogress-custom-parent {
+  overflow: hidden;
+  position: relative;
+}
+
+.nprogress-custom-parent #nprogress .spinner,
+.nprogress-custom-parent #nprogress .bar {
+  position: absolute;
+}
+
+@-webkit-keyframes nprogress-spinner {
+  0% {
+  -webkit-transform: rotate(0deg);
+  }
+  100% {
+  -webkit-transform: rotate(360deg);
+  }
+  }
+  @keyframes nprogress-spinner {
+  0% {
+  transform: rotate(0deg);
+  }
+  100% {
+  transform: rotate(360deg);
+  }
+}
+```
